@@ -1,0 +1,60 @@
+/* === Background with Dark Overlay === */
+body {
+    background: url("/sta/login-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7); /* dark overlay */
+    z-index: -1;
+  }
+  
+  /* === Card Styling === */
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* === Headings === */
+  h5 {
+    color: #00ffcc;
+    font-weight: bold;
+  }
+  
+  /* === List Items === */
+  ul li {
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+  }
+  
+  /* === Footer === */
+  footer {
+    background-color: #000;
+    color: #ccc;
+  }
+  
+  /* === Chart Canvas === */
+  canvas {
+    max-height: 300px;
+  }
+  
+  /* === Chatbot Fix === */
+  #chatbot-container {
+    z-index: 9999;
+  }
+  
