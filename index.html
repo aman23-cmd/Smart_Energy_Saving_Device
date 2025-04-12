@@ -6,6 +6,7 @@
   <title>Smart Energy Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
     body {
       background: #111;
@@ -39,114 +40,108 @@
       border-radius: 10px;
     }
 
-    /* Chatbot Floating Button */
-    #chatbot-button {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 60px;
-      height: 60px;
+    /* Social Media Buttons */
+    .social-btn {
       background-color: #00ffaa;
-      border-radius: 50%;
       color: #000;
-      font-size: 28px;
-      font-weight: bold;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      box-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
+      margin: 5px;
       cursor: pointer;
-      z-index: 9998;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
     }
 
-    /* Chatbot UI */
+    .social-btn i {
+      margin-right: 10px;
+    }
+
+    .social-btn:hover {
+      background-color: #00ffcc;
+    }
+
+    /* Chatbot */
+    #chatbot-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #00ffaa;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 24px;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+    }
+
     #chatbot-container {
       position: fixed;
+      bottom: 80px;
       right: 20px;
-      bottom: 90px;
-      width: 320px;
-      height: 450px;
-      background-color: #1c1c1c;
+      background-color: #121212;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+      padding: 10px;
       display: none;
+      width: 300px;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
       flex-direction: column;
-      overflow: hidden;
-      z-index: 9999;
     }
 
     #chatbot-header {
       background-color: #00ffaa;
       color: #000;
-      text-align: center;
-      padding: 12px;
-      font-weight: bold;
+      padding: 10px;
       font-size: 18px;
+      border-radius: 10px;
+      text-align: center;
     }
 
     #chat-window {
-      flex: 1;
-      padding: 10px;
+      max-height: 300px;
       overflow-y: auto;
-      font-size: 14px;
+      margin-bottom: 10px;
+      color: white;
     }
 
     .message {
-      margin: 8px 0;
-      word-wrap: break-word;
+      margin: 10px;
+      padding: 8px;
+      border-radius: 10px;
     }
 
-    .bot {
-      color: #00ffaa;
+    .message.bot {
+      background-color: #1e1e1e;
     }
 
-    .user {
-      color: #ffffff;
+    .message.user {
+      background-color: #00ffaa;
+      color: #000;
       text-align: right;
     }
 
     #chat-input {
       display: flex;
-      border-top: 1px solid #333;
+      justify-content: space-between;
     }
 
     #chat-input input {
-      flex: 1;
+      width: 85%;
       padding: 10px;
+      border-radius: 10px;
       border: none;
-      background-color: #2a2a2a;
+      background-color: #1e1e1e;
       color: white;
-      font-size: 14px;
     }
 
     #chat-input button {
       background-color: #00ffaa;
-      border: none;
-      padding: 10px 15px;
+      border-radius: 10px;
+      padding: 10px;
       color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      #chatbot-container {
-        width: 100%;
-        height: 100vh;
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
-      }
-      #chat-window {
-        padding: 12px;
-        font-size: 16px;
-      }
-      #chat-input input, #chat-input button, #chatbot-header {
-        font-size: 16px;
-        padding: 12px;
-      }
-      #chatbot-header {
-        font-size: 20px;
-      }
+      border: none;
     }
   </style>
 </head>
@@ -186,6 +181,19 @@
   <!-- Pay Bill -->
   <div class="text-center mb-5">
     <a href="https://www.bharatbillpay.com/BillPay.aspx" target="_blank" class="btn btn-success btn-lg">⚡ Pay Your Electricity Bill</a>
+  </div>
+
+  <!-- Social Media Links -->
+  <div class="text-center mb-5">
+    <button onclick="window.open('https://github.com/aman23-cmd', '_blank')" class="social-btn">
+      <i class="fab fa-github"></i> GitHub
+    </button>
+    <button onclick="window.open('https://www.instagram.com/aman23__.__/', '_blank')" class="social-btn">
+      <i class="fab fa-instagram"></i> Instagram
+    </button>
+    <button onclick="window.location.href='mailto:amankau2000@gmail.com'" class="social-btn">
+      <i class="fas fa-envelope"></i> Email
+    </button>
   </div>
 </div>
 
@@ -257,14 +265,6 @@
         plugins: { legend: { labels: { color: '#fff' } } }
       }
     });
-
-    const chatWindow = document.getElementById("chat-window");
-    chatWindow.innerHTML += `<div class="message user">My daily usage is ${dailyKWh.toFixed(2)} kWh</div>`;
-    let tip = dailyKWh < 3 ? "✅ Great! Your usage is optimal." :
-              dailyKWh < 6 ? "⚠️ Moderate usage. Avoid peak hours." :
-              "🔥 High usage! Reduce appliance time.";
-    chatWindow.innerHTML += `<div class="message bot">${tip}</div>`;
-    chatWindow.scrollTop = chatWindow.scrollHeight;
   });
 
   function sendMessage() {
@@ -296,7 +296,12 @@
 
   function toggleChat() {
     const chatbot = document.getElementById("chatbot-container");
-    chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+    if (chatbot.style.display === "none" || chatbot.style.display === "") {
+      chatbot.style.display = "flex";
+      chatbot.style.flexDirection = "column";
+    } else {
+      chatbot.style.display = "none";
+    }
   }
 </script>
 </body>
