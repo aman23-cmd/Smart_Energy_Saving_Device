@@ -1,0 +1,21 @@
+# Node
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Env
+.env
+server/.env
+client/.env
+
+# AI models
+ai/models/
